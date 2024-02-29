@@ -85,6 +85,7 @@ class Predictor(BasePredictor):
 
         # TODO: Record the previous models loaded
         # If different, run /free to free up models and memory
+        print(workflow_json)
 
         wf = self.comfyUI.load_workflow(workflow_json or EXAMPLE_WORKFLOW_JSON)
 

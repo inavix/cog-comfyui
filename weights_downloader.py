@@ -17,10 +17,10 @@ class WeightsDownloader:
 
     def download_weights(self, weight_str):
         if weight_str in self.weights_map:
-            if self.weights_manifest.is_non_commercial_only(weight_str):
-                print(
-                    f"⚠️  {weight_str} is for non-commercial use only. Unless you have obtained a commercial license.\nDetails: https://github.com/fofr/cog-comfyui/blob/main/weights_licenses.md"
-                )
+            # if self.weights_manifest.is_non_commercial_only(weight_str):
+            #     print(
+            #         f"⚠️  {weight_str} is for non-commercial use only. Unless you have obtained a commercial license.\nDetails: https://github.com/fofr/cog-comfyui/blob/main/weights_licenses.md"
+            #     )
             self.download_if_not_exists(
                 weight_str,
                 self.weights_map[weight_str]["url"],
@@ -51,7 +51,7 @@ class WeightsDownloader:
         print(f"⏳ Downloading {weight_str} to {dest}")
         start = time.time()
         subprocess.check_call(
-            ["pget", "--log-level", "warn", "-xf", url, dest], close_fds=False
+            ["wget", "-O",  f"{dest}/{weight_str}", "-L", url], close_fds=False
         )
         elapsed_time = time.time() - start
         try:
